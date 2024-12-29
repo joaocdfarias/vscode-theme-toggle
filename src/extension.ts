@@ -1,26 +1,84 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-theme-toggle" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('vscode-theme-toggle.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from VSCode Theme Toggle!');
-	});
-
-	context.subscriptions.push(disposable);
+interface IGetThemes {
+  readonly currentTheme: string;
+  preferredThemes: {
+    light?: string;
+    dark?: string;
+  };
 }
 
-// This method is called when your extension is deactivated
+export async function getThemes(): Promise<IGetThemes> {
+  const { colorTheme, preferredLightColorTheme, preferredDarkColorTheme } =
+    vscode.workspace.getConfiguration("workbench");
+
+  return {
+    currentTheme: colorTheme,
+    preferredThemes: {
+      light: preferredLightColorTheme ?? undefined,
+      dark: preferredDarkColorTheme ?? undefined,
+    },
+  };
+}
+
+export async function setThemes(themes: IGetThemes) {
+  const hasAutoDetectColorScheme = vscode.workspace
+    .getConfiguration("window")
+    .get("autoDetectColorScheme");
+
+  if (hasAutoDetectColorScheme) {
+    vscode.window.showInformationMessage(
+      "Auto Detect Color Scheme is turned on. You should turn this setting off to extension work properly"
+    );
+    vscode.commands.executeCommand(
+      "workbench.action.openSettings",
+      "window.autoDetectColorScheme"
+    );
+    return;
+  }
+
+  if (!themes.preferredThemes.dark) {
+    vscode.window.showInformationMessage("Dark theme not set");
+    vscode.commands.executeCommand(
+      "workbench.action.openSettings",
+      "workbench.preferredDarkColorTheme"
+    );
+  }
+
+  if (!themes.preferredThemes.light) {
+    vscode.window.showInformationMessage("Light theme not set");
+    vscode.commands.executeCommand(
+      "workbench.action.openSettings",
+      "workbench.preferredLightColorTheme"
+    );
+  }
+}
+
+export async function toggleTheme() {
+  vscode.commands.executeCommand("workbench.action.toggleLightDarkThemes");
+}
+
+let statusBar: vscode.StatusBarItem;
+
+export function activate(context: vscode.ExtensionContext) {
+  const commandId = "vscode-theme-toggle.toggle";
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand(commandId, async () => {
+      const themes = await getThemes();
+      await setThemes(themes);
+      await toggleTheme();
+    })
+  );
+
+  statusBar = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Right,
+    100
+  );
+  statusBar.command = commandId;
+  statusBar.text = "$(color-mode) Toggle";
+  statusBar.show();
+  context.subscriptions.push(statusBar);
+}
+
 export function deactivate() {}

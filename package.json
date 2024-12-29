@@ -1,7 +1,7 @@
 {
   "name": "vscode-theme-toggle",
-  "displayName": "VSCode Theme Toggle",
-  "description": "Simple VSCode theme toggle",
+  "displayName": "Visual Studio Code Theme Toggle",
+  "description": "Simple Visual Studio Code theme toggle",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.96.0"
@@ -14,11 +14,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-theme-toggle.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-theme-toggle.toggle",
+        "title": "Toggle VS Code Theme"
       }
     ]
   },
+  "publisher": "joaocdfarias",
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
