@@ -23,6 +23,11 @@
       }
     ]
   },
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
   "publisher": "joaocdfarias",
   "scripts": {
     "vscode:prepublish": "npm run compile",
