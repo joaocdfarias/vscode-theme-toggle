@@ -2,7 +2,7 @@
   "name": "vscode-theme-toggle",
   "displayName": "Visual Studio Code Theme Toggle",
   "description": "Simple Visual Studio Code theme toggle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.96.0",
     "node": ">=20 <22"
@@ -13,7 +13,9 @@
   "repository": {
     "url": "https://github.com/joaocdfarias/vscode-theme-toggle"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
