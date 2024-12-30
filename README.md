@@ -8,13 +8,13 @@ Simple Visual Studio Code extension for toggling between dark and light themes f
 2. Set a preferred light color scheme (`workbench.preferredLightColorTheme`);
 3. Disable the **Auto Detect Color Scheme Option** (`window.autoDetectColorScheme`);
 
-**Don't worry! The extension itself will guide you to disable the "Auto Detect Color Scheme Option" 😊.**
+**Don't worry! The extension itself will guide you to disable the "Auto Detect Color Scheme" option 😊.**
 
 ## 🤔 How to
 
-By default VS Code sets "Default Dark Modern" for preferred dark color scheme and "Default Light Modern" for preferred light color scheme. So, if you have another theme in mind to use as dark/light you can change in the user settings. Here a step-by-step guide:
+By default VS Code sets "Default Dark Modern" for preferred dark color scheme and "Default Light Modern" for preferred light color scheme. So, if you have another theme in mind to use as dark/light you can change in the user settings. Here's a step-by-step guide:
 
-1. Go to user settings by pressing `Ctrl + Shift + P` and typing "Open User Settings" (should have ">" at the beginning);
+1. Go to user settings by pressing `Ctrl + Shift + P` and type: "Open User Settings" (should have ">" at the beginning);
 2. At the **Search settings** bar, search by `workbench.preferredDarkColorTheme` and set you preferred dark color theme;
 3. After that you can search by `workbench.preferredLightColorTheme` to set you preferred light color theme;
 
