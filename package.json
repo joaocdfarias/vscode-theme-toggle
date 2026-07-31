@@ -2,6 +2,7 @@
   "name": "vscode-theme-toggle",
   "displayName": "Theme Toggle",
   "description": "Simple Visual Studio Code theme toggle",
+  "license": "MIT",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.96.0",
