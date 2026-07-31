@@ -5,7 +5,7 @@
   "version": "0.0.7",
   "engines": {
     "vscode": "^1.96.0",
-    "node": ">=20 <22"
+    "node": ">=22"
   },
   "categories": [
     "Other"
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
+    "@types/node": "24.x",
     "@types/vscode": "^1.96.0",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
